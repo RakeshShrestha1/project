@@ -5,11 +5,12 @@ function addTodo() {
     const todoText = newTodoInput.value.trim();
 
     if (todoText == ''){
-        alert("khali tahu naxoda!!!!!!");
+        alert("you must enter somthing");
     } else{
         const listItem = document.createElement('li');
         listItem.className = 'todo-item';
         listItem.innerHTML = `
+            <input type="checkbox" class="status-checkbox" onclick="changeStatus(this)">
             <span contenteditable="true">${todoText}</span>
             <div>
                 <button class="edit-btn" onclick="editTodo(this)">Edit</button>
@@ -33,5 +34,16 @@ function editTodo(button) {
 
     if (newText !== null) {
         todoTextElement.textContent = newText;
+    }
+}
+
+function changeStatus(checkbox) {
+    const listItem = checkbox.parentElement.parentElement;
+    const todoTextElement = listItem.querySelector('span');
+
+    if (checkbox.checked) {
+        todoTextElement.style.textDecoration = 'line-through';
+    } else {
+        todoTextElement.style.textDecoration = 'none';
     }
 }
